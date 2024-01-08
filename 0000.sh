@@ -14,7 +14,7 @@
 
 # Update packages and install necessary tools
 apt update -y && apt upgrade -y
-apt install -y git curl wget vim ufw
+apt install -y git curl wget vim ufw apt-mirror
 
 # Set up the firewall
 ufw allow OpenSSH
