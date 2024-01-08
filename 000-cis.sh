@@ -14,3 +14,6 @@ sed -i "s#CIS_TMP_DIR=.*#CIS_TMP_DIR='$(pwd)'/tmp#" /etc/default/cis-hardening
 # Auditing the specific check
 ./bin/hardening/1.1.1.1_disable_freevxfs.sh --audit
 
+# QuickStart
+./bin/hardening.sh --audit-all-enable-passed
+
