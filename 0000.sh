@@ -13,16 +13,16 @@
 # Note that you should replace some values such as the timezone according to your need
 
 # Update packages and install necessary tools
-apt update -y && sudo apt upgrade -y
-apt install -y curl wget vim ufw
+apt update -y && apt upgrade -y
+apt install -y git curl wget vim ufw
 
 # Set up the firewall
 ufw allow OpenSSH
 ufw enable
 
 # Create a new user and give them sudo privileges
-adduser <username>
-usermod -aG sudo <username>
+adduser test
+usermod -aG sudo test
 
 # Configure SSH daemon to use key authentication
 ssh_config="/etc/ssh/sshd_config"
