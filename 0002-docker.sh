@@ -4,6 +4,7 @@
 apt update && apt upgrade -y
 curl -fsSL https://get.docker.com | sh
 systemctl enable --now docker
+systemctl start docker
 
 usermod -aG docker amano
 
