@@ -13,12 +13,12 @@
 # Note that you should replace some values such as the timezone according to your need
 
 # Update packages and install necessary tools
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y curl wget vim ufw
+apt update -y && sudo apt upgrade -y
+apt install -y curl wget vim ufw
 
 # Set up the firewall
-sudo ufw allow OpenSSH
-sudo ufw enable
+ufw allow OpenSSH
+ufw enable
 
 # Create a new user and give them sudo privileges
 adduser <username>
@@ -31,7 +31,7 @@ sed -i 's/#AuthorizedKeysFile      .ssh\/authorized_keys/AuthorizedKeysFile     
 systemctl restart ssh
 
 # Disable password login via SSH
-sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' $ssh_config
+sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' $ssh_config
 systemctl restart ssh
 
 # Enable automatic security updates
