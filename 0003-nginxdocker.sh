@@ -16,7 +16,7 @@ docker pull nginx
 docker run --name videogirl_nginx \
     -p 80:80 \
     -p 443:443 \
-    -e VIRTUAL_HOST=videogirl.ai \
+    -e VIRTUAL_HOST=server.ai \
     -e LETSENCRYPT_EMAIL=your_email@example.com \
     -d nginx
 
@@ -32,7 +32,7 @@ server {
 
 server {
     listen      443 ssl http2;
-    server_name videogirl.ai;
+    server_name server.ai;
 
     # Self-signed certificate
     ssl_certificate     /etc/ssl/certs/nginx-selfsigned.crt;
