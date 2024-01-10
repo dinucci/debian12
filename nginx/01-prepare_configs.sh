@@ -12,21 +12,22 @@ NGINX_FOLDER="${WORKDIR}/nginx"
 mkdir -p ${NGINX_FOLDER}/{certs,config,data,traefik}
 cd ${NGINX_FOLDER}/traefik
 cat > traefik.toml <<EOL
-... # Insert contents of traefik.toml from Step 2 above
+# Insert contents of traefik.toml from Step 2 above
 EOL
 touch acme.json
 chmod 600 acme.json
 
 cat > ${NGINX_FOLDER}/config/nginx.conf <<EOL
-... # Insert contents of nginx.conf from Step 4 above
+# Insert contents of nginx.conf from Step 4 above
 EOL
 
 cat > ${NGINX_FOLDER}/nginx-compose.yml <<EOL
-... # Insert contents of nginx-compose.yml below
+# Insert contents of nginx-compose.yml below
 version: '3.9'
 
 services:
   nginx:
+    image: nginx:latest
     depends_on:
       - traefik
     volumes:
