@@ -1,6 +1,6 @@
  Sure, here are three Bash scripts to automate setting up the prerequisites, preparing configurations, and launching containers. Save each script separately as follows:
 
-1. **setup\_prereqs.sh:** Contains commands to set up prerequisites such as updating, installing software, granting permissions, etc.
+1. **00-setup\_prereqs.sh:** Contains commands to set up prerequisites such as updating, installing software, granting permissions, etc.
 
 ```bash
 #!/bin/bash
@@ -21,7 +21,7 @@ systemctl enable docker
 exit 0
 ```
 
-2. **prepare\_configs.sh:** Creates folders, prepares Traefik and NGINX configuration files, and sets up other relevant settings.
+2. **02-prepare\_configs.sh:** Creates folders, prepares Traefik and NGINX configuration files, and sets up other relevant settings.
 
 ```bash
 #!/bin/bash
@@ -78,7 +78,7 @@ exit 0
 
 Replace `...` with the actual contents mentioned in Steps 2 and 4. Make sure to replace `${NGINX_HOST}` in the last code block with your desired hostname (i.e., videogirl.ai).
 
-3. **launch\_containers.sh:** Launches the Traefik and NGINX containers.
+3. **03-launch\_containers.sh:** Launches the Traefik and NGINX containers.
 
 ```bash
 #!/bin/bash
