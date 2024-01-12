@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #myCanvas {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Create a scene, camera, and renderer
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+        var renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("myCanvas") });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Load the 3D model from the glTF file
+        var loader = new THREE.GLTFLoader();
+        loader.load("teste.glb", function (gltf) {
+            var model = gltf.scene;
+            scene.add(model);
+
+            // Set up rotation animation
+            var animate = function () {
+                requestAnimationFrame(animate);
+
+                // Rotate the model around its Y axis at a speed of 2 radians per second
+                model.rotation.y += 2 * Math.PI / 180;
+
+                // Render the scene
+                renderer.render(scene, camera);
+            };
+
+            animate();
+        });
+    </script>
+</body>
+</html>
