@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>My 3D Model Viewer</title>
+    <style>
+      body { margin: 0; padding: 0; }
+      #viewer { width: 100%; height: 100vh; background-color: #f0f0f0; }
+    </style>
+  </head>
+  <body>
+    <div id="viewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/@loaders.gl/gltf@^2.0.0/dist/index.umd.js"></script>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      
+      // Load the glTF model
+      GLTFLoader.load('path/to/model.glb', function (gltf) {
+        gltf.scene.traverse((child) => {
+          if (child.isMesh) {
+            child.material.metalness = 0.9;
+            child.material.roughness = 0.5;
+          }
+        });
+        
+        scene.add(gltf.scene);
+      });
+      
+      // Set up the renderer
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById("viewer").appendChild(renderer.domElement);
+      
+      // Add lights to the scene
+      const light = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(light);
+      
+      // Animate the rotation of the model
+      let angle = 0;
+      setInterval(() => {
+        angle += Math.PI * 0.01;
+        gltf.scene.rotation.y = angle;
+        requestAnimationFrame(() => {
+          renderer.render(scene, camera);
+        });
+      }, 1000 / 60);
+    </script>
+  </body>
+</html>
