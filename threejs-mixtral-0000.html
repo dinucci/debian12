@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>3D Model Viewer</title>
+        <style>
+            body { margin: 0; }
+            canvas { display: block; }
+        </style>
+    </head>
+    <body>
+        <script src="https://threejs.org/build/three.min.js"></script>
+        <script src="https://threejs.org/examples/jsm/loaders/GLTFLoader.js"></script>
+        <script>
+            // Set up scene, camera, and renderer
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+            const renderer = new THREE.WebGLRenderer({antialias: true});
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            
+            // Add lights to the scene
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+
+            // Load the 3D model
+            const loader = new THREE.GLTFLoader();
+            loader.load('model.gltf', function (gltf) {
+                const model = gltf.scene;
+                scene.add(model);
+                
+                // Position the camera
+                camera.position.z = 5;
+                
+                // Animate the model
+                const animate = function () {
+                    requestAnimationFrame(animate);
+
+                    // Rotate the model
+                    model.rotation.y += 0.01;
+
+                    // Render the scene
+                    renderer.render(scene, camera);
+                };
+                animate();
+            });
+
+            // Resize the renderer on window resize
+            window.addEventListener('resize', function () {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+        </script>
+    </body>
+</html>
