@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Add the 'amano' user to the 'docker' group
+# Add the 'test' user to the 'docker' group
 apt update && apt upgrade -y
 curl -fsSL https://get.docker.com | sh
 systemctl enable --now docker
 systemctl start docker
 
-usermod -aG docker amano
+groupadd docker
+usermod -aG docker test
 
+newgrp docker
